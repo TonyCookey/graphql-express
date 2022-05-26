@@ -32,7 +32,7 @@ function getProductsByPrice(min, max) {
 }
 
 function getProductByID(id) {
-    return products.find(product => product.id == id)
+    return products.find(product => product.id === id)
 }
 
 function addNewProduct(id, description, price) {
@@ -45,10 +45,23 @@ function addNewProduct(id, description, price) {
     products.push(newProduct)
     return newProduct
 }
+function addNewProductReview(product_id, rating, comment) {
+    const index = products.findIndex((product) => product.id === product_id)
+
+    if (index > -1) {
+        products[index].reviews.push({
+            rating,
+            comment
+        })
+        return products[index]
+    }
+    return null
+}
 
 module.exports = {
     getAllProducts,
     getProductsByPrice,
     getProductByID,
-    addNewProduct
+    addNewProduct,
+    addNewProductReview
 }
